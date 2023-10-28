@@ -20,6 +20,10 @@ a {
     text-decoration: none;
     color: inherit;
 }
+button {
+    cursor: pointer;
+    transition: 0.2s;
+}
 
 header {
     display: flex;
@@ -188,17 +192,125 @@ header {
     border-radius: 10px;
     
     outline: solid 1px transparent;
+    box-shadow: 0 1px 2px -1px var(--secondary);
     
     transition: 0.2s;
 }
 .articlePreview:hover {
+    box-shadow: 0 1px 3px -1px var(--secondary);
     outline: solid 2px var(--accent);
     scale: 1.03;
+}
+.articlePreview:active {
+    box-shadow: 0 1px 4px -1px var(--secondary);
+    outline-offset: 2px;
+    scale: 0.98;
 }
 .articlePreviewTitle {
     font-size: 18px;
 }
 .articlePreviewThumbnail {
+    position: relative;
     object-fit: cover;
     width: 100%;
+    
+    border-radius: 5px;
+    box-shadow: 0 1px 1px -1px var(--secondary);
+    
+    transition: 0.3s;
+}
+.articlePreview:hover .articlePreviewThumbnail {
+    scale: 1.02;
+}
+
+
+/* ARTICLE */
+.articleHead {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 80px;
+    
+    background-color: var(--primaryTop);
+    border-bottom: solid 1px var(--accent);
+}
+.articleSummary {
+    font-size: 20px;
+    line-height: 30px;
+}
+.articleContent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+    margin: 40px 20px;
+}
+.articleSection {    
+    padding: 30px;
+    outline: solid 2px var(--primaryTop);
+    border-radius: 10px;
+    
+    transition: 0.3s;
+}
+.articleSection:hover {
+    background-color: var(--primaryTop);
+    outline-width: 5px;
+}
+.articleSection:nth-child(even) {
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+.articleSection:nth-child(even):hover {
+    background-color: var(--secondaryTop);
+}
+.articleSectionTitle {
+    font-size: 30px;
+}
+.articleSectionContent {
+    display: flex;
+    gap: 30px;
+}
+.articleSection:nth-child(odd) .articleSectionContent {
+    flex-direction: row-reverse;
+}
+.articleImage {
+    object-fit: cover;
+    width: 50%;
+    border-radius: 5px;
+    
+    box-shadow: 0 1px 2px -1px var(--secondaryTop);
+}
+.articleSection:nth-child(even) .articleImage {
+    box-shadow: 0 2px 2px var(--contrast);
+}
+.articleSectionDescription {
+    font-size: 20px;
+    white-space: pre-line;
+}
+
+.articleFooter {
+    display: flex;
+    
+    padding: 50px 80px;
+    background-color: var(--primaryTop);
+    justify-content: space-between;
+}
+.articleToTop {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    
+    outline: solid 2px var(--secondary);
+    background-color: var(--secondaryTop);
+    color: var(--primary);
+}
+.articleToTop:hover {
+    background-color: var(--secondary);
+}
+.articleToTop:active {
+    outline: solid 3px var(--contrast);
+    
+    translate: 0 -5px;
+    box-shadow: 0 5px 2px -2px var(--secondaryTop);
+    transition: 0.15s;
 }
