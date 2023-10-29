@@ -173,7 +173,7 @@ header {
 
 #articleGrid {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr 1fr;
     justify-content: center;
     gap: 20px;
 }
