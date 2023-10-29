@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Outlis Numworks - Par Armibule</title>
+        
+        <script src="shared.js"></script> 
+        
+        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <img id="title" src="assets/icon.png" onclick="redirect('index.html')">
+            <div id="headerRight">
+                <a class="headerOption" href="games.html">Jeux</a>
+                <a class="headerOption">Outils</a>
+                <a class="headerOption" href="articles.html">Articles</a>
+                <a class="headerOption" href="info.html">Infos</a>
+            </div>
+        </header>
+
+        <h1>Informations</h1>
+
+        <p id="infosText">
+            Cette page web a été créée par Armibule dans le but de fournir des outils et jeux pour la calculatrice Numworks.
+        </p>
+
+        <h2>Me contacter:</h2>
+        <div id="socialsGrid">
+            <img class="social" onclick="newTab('https://github.com/Armibule')" src="https://cdn-icons-png.flaticon.com/512/25/25231.png">
+            <img class="social" onclick="alert('Ajoutez armibule sur discord')" src="https://upload.wikimedia.org/wikipedia/fr/4/4f/Discord_Logo_sans_texte.svg">
+            <img class="social" onclick="newTab('https://scratch.mit.edu/users/Armibule/')" src="https://upload.wikimedia.org/wikipedia/commons/7/75/Scratch.logo.S.png">
+        </div>
+    </body>
+</html>
