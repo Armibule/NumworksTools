@@ -23,17 +23,28 @@
             </div>
         </header>
 
-        <h1>Informations</h1>
+        <h1>Outlis</h1>
 
-        <p id="infosText">
-            Cette page web a été créée par Armibule dans le but de fournir des outils et jeux pour la calculatrice Numworks.
-        </p>
+        <div id="toolsCarousel">
+            <button id="toolsCarouselLeft">◄</button>
+            <div id="toolsCarouselElements">
+                <div class="toolsCarouselElement" onclick="redirect('imageLoader.html')">
+                    <h2>Créateur d'images 1</h2>
+                </div>
 
-        <h2>Me contacter:</h2>
-        <div id="socialsGrid">
-            <img class="social" onclick="newTab('https://github.com/Armibule')" src="https://cdn-icons-png.flaticon.com/512/25/25231.png">
-            <img class="social" onclick="alert('Ajoutez armibule sur discord')" src="https://upload.wikimedia.org/wikipedia/fr/4/4f/Discord_Logo_sans_texte.svg">
-            <img class="social" onclick="newTab('https://scratch.mit.edu/users/Armibule/')" src="https://upload.wikimedia.org/wikipedia/commons/7/75/Scratch.logo.S.png">
+                <div class="toolsCarouselElement">
+                    <h2>Créateur d'images 2</h2>
+                </div>
+                <div class="toolsCarouselElement">
+                    <h2>Créateur d'images 3</h2>
+                </div>
+                <div class="toolsCarouselElement">
+                    <h2>Créateur d'images 4</h2>
+                </div>
+            </div>
+            <button id="toolsCarouselRight">►</button>
         </div>
+        
+        <script src="tools.js"></script>
     </body>
 </html>

@@ -357,3 +357,81 @@ header {
     scale: 0.95;
     outline: solid 2px var(--accent);
 }
+
+/* TOOLS */
+
+#toolsCarousel {
+    display: flex;
+    
+    width: 70%;
+    height: 50vh;
+    margin-inline: auto;
+    
+    align-items: center;
+    gap: 30px;
+    padding: 30px;
+    
+    background-color: var(--primaryTop);
+    border-radius: 10px;
+}
+#toolsCarouselElements {    
+    display: flex;
+    overflow: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    
+    padding: 5px;
+    height: 100%;
+    
+    gap: 5%;
+    box-sizing: border-box;
+}
+.toolsCarouselElement {
+    flex-shrink: 0;
+    width: 80%;
+    height: 100%;
+    padding: 10px;
+    
+    scroll-snap-align: center;
+    background-color: var(--primary);
+    border-radius: 5px;
+    box-shadow: 0 1px 2px -1px var(--secondary);
+    cursor: pointer;
+    transition: 0.3s;
+    outline: solid 0 transparent;
+    
+    box-sizing: border-box;
+}
+.toolsCarouselElement:hover {
+    scale: 0.98;
+    outline: solid 1px var(--accent);
+}
+.toolsCarouselElement:active {
+    scale: 0.95;
+    outline: solid 2px var(--accent);
+}
+.toolsCarouselElement:first-child {margin-left: 10%;}
+.toolsCarouselElement:last-child {margin-right: 10%;}
+#toolsCarouselLeft, #toolsCarouselRight {
+    border: none;
+    font-size: 20px;
+    flex-shrink: 0;
+    
+    width: 40px;
+    height: 40px;
+    
+    background-color: var(--primary);
+    color: var(--secondaryTop);
+    border-radius: 5px;
+    box-shadow: 0 1px 2px -1px var(--secondaryTop);
+    transition: 0.1s;
+}
+#toolsCarouselLeft:hover, #toolsCarouselRight:hover {
+    translate: 0 -2px;
+    box-shadow: 0 2px 4px -2px var(--secondaryTop);
+}
+#toolsCarouselLeft:active, #toolsCarouselRight:active {
+    translate: 0 2px;
+    scale: 0.95;
+    box-shadow: 0 0 0 var(--contrast), inset 0 0 2px -1px var(--accent);
+}
