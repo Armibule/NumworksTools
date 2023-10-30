@@ -23,28 +23,20 @@
             </div>
         </header>
 
-        <h1>Outlis</h1>
-
-        <div id="toolsCarousel">
-            <button id="toolsCarouselLeft">◄</button>
-            <div id="toolsCarouselElements">
-                <div class="toolsCarouselElement" onclick="redirect('imageMaker.html')">
-                    <h2>Créateur d'images 1</h2>
-                </div>
-
-                <div class="toolsCarouselElement">
-                    <h2>Créateur d'images 2</h2>
-                </div>
-                <div class="toolsCarouselElement">
-                    <h2>Créateur d'images 3</h2>
-                </div>
-                <div class="toolsCarouselElement">
-                    <h2>Créateur d'images 4</h2>
-                </div>
-            </div>
-            <button id="toolsCarouselRight">►</button>
+        <div id="loadedImageContainer">
+            <div id="loadImageButton">+</div>
+            <img id="loadedImage" src="https://cdn-icons-png.flaticon.com/512/3093/3093924.png">
         </div>
-        
-        <script src="tools.js"></script>
+
+        <div class="loadImagePopup">
+            <div id="loadImageMethods">
+                <h2>Méthodes</h2>
+                <div id="loadImageMethodsButtons">
+                <button id="uploadImage" class="loadImageMethodsButton">Uploader</button>
+                <button id="imageLink" class="loadImageMethodsButton">Lien</button>
+            </div>
+        </div>
+
     </body>
+    <script src="imageMaker.js"></script>
 </html>

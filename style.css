@@ -9,6 +9,7 @@
     --contrast: #337aff;
 }
 
+
 body {
     background-color: var(--primary);
 
@@ -434,4 +435,122 @@ header {
     translate: 0 2px;
     scale: 0.95;
     box-shadow: 0 0 0 var(--contrast), inset 0 0 2px -1px var(--accent);
+}
+
+/* IMAGE MAKER */
+
+#loadedImageContainer {
+    position: relative;
+    
+    width: 30vw;
+    height: 30vw;
+    border-radius: 10px;
+    overflow: hidden;
+    
+    border: solid 2px var(--primaryTop);
+}
+#loadImageButton {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    
+    justify-content: center;
+    align-items: center;
+    font-size: 120px;
+    user-select: none;
+    color: var(--accent);
+    background-color: #00000030;
+    
+    backdrop-filter: blur(0px);
+    opacity: 0;
+    transition: 0.3s;
+    
+    cursor: pointer;
+}
+#loadImageButton:hover {
+    opacity: 1;
+    backdrop-filter: blur(3px);
+    text-shadow: 0 1px var(--primary), 0 -1px var(--primary), 1px 0px var(--primary), -1px 0px var(--primary), 0 2px var(--secondary);
+}
+#loadImageButton:active {
+    opacity: 1;
+    backdrop-filter: blur(5px);
+    font-size: 100px;
+}
+@keyframes bgscroll {
+    from {background-position: 0 0}
+    to {background-position: 20px 20px}
+}
+#loadedImage {
+    image-rendering: pixelated;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    
+    background-image: linear-gradient(135deg, #00000010 50%, transparent 50%), linear-gradient(45deg, #00000010 50%, transparent 50%);
+    background-size: 20px 20px;
+    /*animation: bgscroll 2s infinite linear;*/
+}
+.loadImagePopup {
+    position: fixed;
+    inset: 0;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    opacity: 0;
+    pointer-events: none;
+    background-color: #00000030;
+    backdrop-filter: blur(5px);
+    
+    transition: 0.3s;
+}
+.openedLoadImagePopup {
+    opacity: 1;
+    pointer-events: all;
+}
+#loadImageMethods {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    width: 30vw;
+    height: max-content;
+    
+    background-color: var(--primary);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px -2px var(--secondaryTop);
+    
+    scale: 0.5;
+    transition: 0.2s;
+}
+.openedLoadImagePopup #loadImageMethods {
+    scale: 1;
+    transition: 0.3s;
+}
+#loadImageMethodsButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.loadImageMethodsButton {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--secondaryTop);
+    color: var(--primary);
+}
+.loadImageMethodsButton:hover {
+    background-color: var(--contrast);
+    translate: 0 -2px;
+    box-shadow: 0 2px 2px -2px var(--secondaryTop);
+}
+.loadImageMethodsButton:active {
+    translate: 0 1px;
+    box-shadow: 0 0 var(--secondaryTop);
+    scale: 0.98;
 }
