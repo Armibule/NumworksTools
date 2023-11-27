@@ -23,9 +23,23 @@
             </div>
         </header>
 
-        <div id="loadedImageContainer">
-            <div id="loadImageButton">+</div>
-            <img id="loadedImage" src="https://cdn-icons-png.flaticon.com/512/3093/3093924.png">
+        <div id="imageMaker">
+            <div id="loadedImageContainer">
+                <div id="loadImageButton">+</div>
+                <img id="loadedImage" src="https://cdn-icons-png.flaticon.com/512/3093/3093924.png">
+            </div>
+            <div id="previewContainer">
+                <canvas id="previewCanvas"></canvas>
+                <div id="resultContainer">
+                    <span id="resultTitle">Résultats</span>
+                    <span class="resultField">Poids: <span id="resultStorage">- Ko</span></span>
+                    <span class="resultField">Largeur: <span id="resultWidth">-</span> pixels</span>
+                    <span class="resultField">Hauteur: <span id="resultHeight">-</span> pixels</span>
+                    <div id="resultContainerButtons">
+                        <button id="copyCodeButton">Copier le code</button><button onclick="newTab('https://my.numworks.com/')">Numworks</button><button onclick="newTab('https://my.numworks.com/python/kellerogautry/imgdraw_opti')">Décodeur</button><button onclick="newTab('articles.html')">Aide</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="loadImagePopup">

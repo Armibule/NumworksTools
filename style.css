@@ -7,6 +7,8 @@
 
     --accent: #ffb734;
     --contrast: #337aff;
+    
+    --green: #0bbf14;
 }
 
 
@@ -439,6 +441,14 @@ header {
 
 /* IMAGE MAKER */
 
+#imageMaker {
+    display: grid;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    grid-template-columns: auto auto;
+    align-items: center;
+}
 #loadedImageContainer {
     position: relative;
     
@@ -446,6 +456,7 @@ header {
     height: 30vw;
     border-radius: 10px;
     overflow: hidden;
+    margin-inline: auto;
     
     border: solid 2px var(--primaryTop);
 }
@@ -554,3 +565,78 @@ header {
     box-shadow: 0 0 var(--secondaryTop);
     scale: 0.98;
 }
+
+#previewContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vw;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: var(--primaryTop)
+}
+#previewCanvas {
+    image-rendering: pixelated;
+    height: 80%;
+    border: solid 1.5px var(--accent);
+    border-radius: 10px;
+    background-image: linear-gradient(135deg, #00000010 50%, transparent 50%), linear-gradient(45deg, #00000010 50%, transparent 50%);
+    background-size: 30px 30px;
+}
+#resultContainer {
+    display: flex;
+    flex-direction: column;
+    outline: solid 2px var(--primary);
+    background-color: var(--primary);
+    padding: 20px;
+    gap: 5px;
+    border-radius: 10px;
+    box-shadow: inset 0 1px 4px -2px var(--secondaryTop);
+}
+.resultStorageSmall {
+    color: var(--green)
+}
+.resultStorageMedium {
+    color: orange;
+}
+.resultStorageBig {
+    color: darkred;
+}
+.resultField {
+    color: var(--secondaryTop)
+}
+#resultTitle {
+    padding: 10px;
+    font-size: 22px;
+}
+#resultContainerButtons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+#resultContainerButtons > button {
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: none;
+}
+@keyframes copyButton {
+    0% {
+        color: var(--primary);
+    } 30% {
+        background-color: var(--green);
+        color: var(--primary);
+    } 60% {
+        background-color: var(--green);
+        background-color: inherit;
+        color: inherit;
+        outline: solid 2px var(--green);
+    } 100% {
+        outline: solid 2px transparent;
+        outline-offset: 2px;
+    }
+}
+/*
+#copyCodeButton {
+    animation: copyButton 1s ease-out;
+}*/
