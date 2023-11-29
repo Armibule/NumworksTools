@@ -95,7 +95,7 @@ function pixelsToCode(data, width, height) {
     console.log(result.length)
     return result
 }
-const indexesLabels = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,;:!/*-+.-_={}[]()<>@$&\\%^|\"áâäéêëíîïñśóõöúûüÿ☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼┤ÁÂÀ©╣║↕7╝¢¥┐└┴┬├─┼Ã╚ÊËÈıÍÎÏ┘┌█▄¦Ì▀ÓßÔÒ"
+const indexesLabels = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,;:!/*-+.-_={}[]()<>@$&%^|\"áâäéêëíîïñśóõöúûüÿ☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼┤ÁÂÀ©╣║↕7╝¢¥┐└┴┬├─┼Ã╚ÊËÈıÍÎÏ┘┌█▄¦Ì▀ÓßÔÒ"
 function pixelsToCodeIndexed(data, width, height, partitionLength) {
     if (indexesLabels.length < partitionLength || partitionLength <= 0) {
         throw Exception(`Bad partitionLength value: ${partitionLength}`)
