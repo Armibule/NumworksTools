@@ -95,7 +95,34 @@ function pixelsToCode(data, width, height) {
     console.log(result.length)
     return result
 }
-const indexesLabels = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,;:!/*-+.-_={}[]()<>@$&%^|\"áâäéêëíîïñśóõöúûüÿ☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼┤ÁÂÀ©╣║↕7╝¢¥┐└┴┬├─┼Ã╚ÊËÈıÍÎÏ┘┌█▄¦Ì▀ÓßÔÒ"
+//const indexesLabels = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,;:!/*-+.-_={}[]()<>@$&%^|\"áâäéêëíîïñśóõöúûüÿ☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼┤ÁÂÀ©╣║↕7╝¢¥┐└┴┬├─┼Ã╚ÊËÈıÍÎÏ┘┌█▄¦Ì▀ÓßÔÒ"
+const indexesLabels = `{zEDGFA@CBMLONIHKJUTWVQPSR]_^YX[Z%̈$'&! #"-,/.̄)(+*=<?>;:
+    ¢¡®­¬«©±°§¦¥¤£edgfa\`cbmlonihkjutwvqpsr}\|~yx`
+
+    /*# s="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,;:!/*-+._={}[]()<>@$&%^|\"☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕¶§▬↨↑↓→←∟↔▲▼┤©╣║╝¢¥┐└┴┬├─┼╚ı┘┌█▄¦▀ß"
+s="".join([chr(i) for i in range(256)])
+s="""¡¢£¤¥¦§̈©«¬­®̄°±%$'&! #"-,/.)(+*54761032=<?>98;:
+edgfa`cbmlonihkjutwvqpsr}|~yx{zEDGFA@CBMLONIHKJUTWVQPSR]\_^YX[Z"""
+a = set(s)
+
+#for i in s:
+  #print(i)
+  
+print(a)
+
+for i in a:
+  print(i)
+
+if len(a) != len(s):
+  print(len(s) - len(a))
+  for i in a:
+    if s.count(i) > 1:
+      print(i, s.count(i))
+  print("".join(a))
+else:
+  print("OK")
+  print(s)*/
+
 function pixelsToCodeIndexed(data, width, height, partitionLength) {
     if (indexesLabels.length < partitionLength || partitionLength <= 0) {
         throw Exception(`Bad partitionLength value: ${partitionLength}`)
@@ -169,7 +196,7 @@ function pixelsToCodeIndexed(data, width, height, partitionLength) {
         colors += `${RGBToNumber(indexed[key][0])},`
     })
 
-    var result = `from imgdraw_opti import *\np=prs(${colorFoldPower},'${indexesLabels.slice(0, indexedCount)}',(${colors}))\ndr(p,${width},${height},'${pixels}',${scale})`
+    var result = `from imgdraw_opti import *\np=prs(${colorFoldPower},"""${indexesLabels.slice(0, indexedCount)}""",(${colors}))\ndr(p,${width},${height},"""${pixels}""",${scale})`
 
     console.log(result.length)
     return result
