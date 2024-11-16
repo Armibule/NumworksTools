@@ -54,11 +54,11 @@ function setPixel(x, y, color) {
 }
 
 // 1 is not possible
-const scale = 2
+var scale = 2
 
 // in bits, minimum is 2, max is 8
-const colorFoldPower = 5
-const colorFold = 2**colorFoldPower
+var colorFoldPower = 5
+var colorFold = 2**colorFoldPower
 function foldValue(value) {
     // return Math.round(value/colorFold)*colorFold
     return Math.round(value / colorFold)
@@ -66,7 +66,7 @@ function foldValue(value) {
 function unfoldValue(value) {
     return value * colorFold
 }
-const transparencyColor = [255, 255, 255]
+var transparencyColor = [255, 255, 255]
 function getRGB(data, width, x, y) {
     const index = (y*width + x)*4
 
