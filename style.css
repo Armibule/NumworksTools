@@ -516,7 +516,7 @@ header {
     background-color: #00000030;
     backdrop-filter: blur(5px);
     
-    transition: 0.3s;
+    transition: 0.15s ease-out;
 }
 .openedLoadImagePopup {
     opacity: 1;
@@ -536,12 +536,12 @@ header {
     padding: 20px;
     box-shadow: 0 2px 8px -2px var(--secondaryTop);
     
-    scale: 0.5;
-    transition: 0.2s;
+    scale: 0.8;
+    transition: 0.15s ease-out;
 }
 .openedLoadImagePopup #loadImageMethods {
     scale: 1;
-    transition: 0.3s;
+    transition: 0.15s ease-out;
 }
 #loadImageMethodsButtons {
     display: grid;
@@ -565,6 +565,11 @@ header {
     box-shadow: 0 0 var(--secondaryTop);
     scale: 0.98;
 }
+#imageLinkInput {
+    display: none;
+    width: 90%;
+    padding: 4px;
+}
 
 #previewContainer {
     display: flex;
@@ -574,7 +579,8 @@ header {
     gap: 20px;
     padding: 10px;
     border-radius: 20px;
-    background-color: var(--primaryTop)
+    background-color: var(--primaryTop);
+    outline: solid 1px #0002;
 }
 #previewCanvas {
     image-rendering: pixelated;
@@ -604,7 +610,11 @@ header {
     color: darkred;
 }
 .resultField {
-    color: var(--secondaryTop)
+    display: flex;
+    color: var(--secondaryTop);
+    gap: 10px;
+}
+.imageMakerOption input[type="range"] {
 }
 #resultTitle {
     padding: 10px;

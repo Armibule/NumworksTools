@@ -3,23 +3,23 @@
     <head>
         <title>Outlis Numworks - Par Armibule</title>
         
-        <script src="shared.js"></script> 
+        <script src="/NumworksTools/shared.js"></script> 
         
-        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="/NumworksTools/assets/favicon.ico">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/NumworksTools/style.css">
     </head>
     <body>
         <header>
-            <img id="title" src="assets/icon.png" onclick="redirect('index.html')">
+            <img id="title" src="/NumworksTools/assets/icon.png" onclick="redirect('/NumworksTools/index.html')">
             <div id="headerRight">
-                <a class="headerOption" href="games.html">Jeux</a>
-                <a class="headerOption" href="tools.html">Outils</a>
-                <a class="headerOption" href="articles.html">Articles</a>
-                <a class="headerOption" href="info.html">Infos</a>
+                <a class="headerOption" href="/NumworksTools/games.html">Jeux</a>
+                <a class="headerOption" href="/NumworksTools/tools.html">Outils</a>
+                <a class="headerOption" href="/NumworksTools/articles/articles.html">Articles</a>
+                <a class="headerOption" href="/NumworksTools/info.html">Infos</a>
             </div>
         </header>
 
@@ -35,6 +35,25 @@
                     <span class="resultField">Poids: <span id="resultStorage">- Ko</span></span>
                     <span class="resultField">Largeur: <span id="resultWidth">-</span> pixels</span>
                     <span class="resultField">Hauteur: <span id="resultHeight">-</span> pixels</span>
+
+                    <span id="resultTitle">Options</span>
+                    <span class="resultField">Mode: 
+                        <div class="imageMakerOption">
+                            <label for="blackWhiteMode">Noir/Blanc</label><input type="checkbox" id="blackWhiteMode" hidden="true">
+                            <label for="colorMode">Couleurs</label><input type="checkbox" id="colorMode" hidden="true">
+                        </div>
+                    </span>
+                    <span class="resultField">Résolution: 
+                        <div class="imageMakerOption">
+                            <input min="0" max="3" type="range" id="resolutionInput">
+                        </div>
+                    </span>
+                    <span class="resultField">Couleurs: 
+                        <div class="imageMakerOption">
+                            <input min="0" max="4" type="range" id="colorsInput">
+                        </div>
+                    </span>
+
                     <div id="resultContainerButtons">
                         <button id="copyCodeButton">Copier le code</button><button onclick="newTab('https://my.numworks.com/')">Numworks</button><button onclick="newTab('https://my.numworks.com/python/kellerogautry/imgdraw_opti')">Décodeur</button><button onclick="newTab('articles.html')">Aide</button>
                     </div>
@@ -46,11 +65,12 @@
             <div id="loadImageMethods">
                 <h2>Méthodes</h2>
                 <div id="loadImageMethodsButtons">
-                <button id="uploadImage" class="loadImageMethodsButton">Uploader</button>
-                <button id="imageLink" class="loadImageMethodsButton">Lien</button>
-            </div>
+                    <button id="uploadImage" class="loadImageMethodsButton">Uploader</button>
+                    <button id="imageLink" class="loadImageMethodsButton">Lien</button>
+                </div>
+                <input id="imageLinkInput" type="url" placeholder="Ne fonctionne pas pour l'instant, https://cdn.discordapp.com/attachments/...">
         </div>
 
     </body>
-    <script src="imageMaker.js"></script>
+    <script src="/NumworksTools/imageMaker.js"></script>
 </html>
