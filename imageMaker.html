@@ -23,6 +23,13 @@
             </div>
         </header>
 
+        <!--Load libs-->
+        <!--script src="/NumworksTools/lib/DFU.js"></script>
+        <script src="/NumworksTools/lib/DFUse.js"></script>
+        <script src="/NumworksTools/lib/Storage.js"></script>
+        <script src="/NumworksTools/lib/Recovery.js"></script-->
+        <script src="/NumworksTools/lib/numworks.js"></script>
+
         <div id="imageMaker">
             <div id="loadedImageContainer">
                 <div id="loadImageButton">+</div>
@@ -37,15 +44,9 @@
                     <span class="resultField">Hauteur: <span id="resultHeight">-</span> pixels</span>
 
                     <span id="resultTitle">Options</span>
-                    <span class="resultField">Mode: 
-                        <div class="imageMakerOption">
-                            <label for="blackWhiteMode">Noir/Blanc</label><input type="checkbox" id="blackWhiteMode" hidden="true">
-                            <label for="colorMode">Couleurs</label><input type="checkbox" id="colorMode" hidden="true">
-                        </div>
-                    </span>
                     <span class="resultField">Résolution: 
                         <div class="imageMakerOption">
-                            <input min="0" max="3" type="range" id="resolutionInput">
+                            <input min="0" max="5" step="1" type="range" id="resolutionInput">
                         </div>
                     </span>
                     <span class="resultField">Couleurs: 
@@ -53,9 +54,24 @@
                             <input min="0" max="4" type="range" id="colorsInput">
                         </div>
                     </span>
+                    <span class="resultField">Mode: 
+                        <div class="imageMakerOption">
+                            <select id="imageMode">
+                                <option value="colors">Couleurs</option>
+                                <option value="grayscale">Ėchelle de gris</option>
+                                <option value="blackwhite" disabled>Noir et blanc (optimisé)</option>
+                            </select>
+                        </div>
+                    </span>
 
                     <div id="resultContainerButtons">
-                        <button id="copyCodeButton">Copier le code</button><button onclick="newTab('https://my.numworks.com/')">Numworks</button><button onclick="newTab('https://my.numworks.com/python/kellerogautry/imgdraw_opti')">Décodeur</button><button onclick="newTab('articles.html')">Aide</button>
+                        <button hidden id="copyCodeButton">Copier le code</button>
+                        <button hidden id="decoderLinkButton" onclick="newTab('https://my.numworks.com/python/armibule/imgdraw_opti')">Décodeur</button>
+                        <button hidden id="numworksLinkButton" onclick="newTab('https://my.numworks.com/')">Numworks</button>
+                        <button hidden id="helpLinkButton" onclick="newTab('/NumworksTools/articles/articles.html')">Aide</button>
+
+                        <button hidden id="connectButton">Connexion</button>
+                        <button hidden id="transferButton">Transférer</button>
                     </div>
                 </div>
             </div>
@@ -70,7 +86,6 @@
                 </div>
                 <input id="imageLinkInput" style="display: none;" type="url" placeholder="Ne fonctionne pas pour l'instant, https://cdn.discordapp.com/attachments/...">
         </div>
-
     </body>
     <script src="/NumworksTools/imageMaker.js"></script>
 </html>

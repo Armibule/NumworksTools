@@ -14,6 +14,12 @@ imageCanvas.height = 100
 
 
 const copyCodeButton = document.getElementById("copyCodeButton")
+const decoderLinkButton = document.getElementById("decoderLinkButton")
+const numworksLinkButton = document.getElementById("numworksLinkButton")
+const helpLinkButton = document.getElementById("helpLinkButton")
+
+const connectButton = document.getElementById("connectButton")
+const transferButton = document.getElementById("transferButton")
 
 
 // result fields
@@ -26,20 +32,26 @@ const fileInput = document.createElement("input")
 fileInput.type = "file"
 fileInput.accept = "image/*"
 
-var code = ""
+var code = "";
 
 // Setup parameters and listeners
 // 1 is not possible
-var scale = 2
+var scale = 2;
 
 // in bits, minimum is 2, max is 8
-var colorFoldPower = 5
-var colorFold = 2**colorFoldPower
+var colorFoldPower = 5;
+var colorFold = 2**colorFoldPower;
+
+const MODE_COLOR = "colors";
+const MODE_GRAYSCALE = "grayscale";
+const MODE_BLACKWHITE = "blackwhite";
+var imageMode = MODE_COLOR;
 
 const resolutionInput = document.getElementById("resolutionInput");
 const colorsInput = document.getElementById("colorsInput");
+const imageModeInput = document.getElementById("imageMode");
 resolutionInput.oninput = () => {
-    scale = 4 - resolutionInput.value;
+    scale = 6 - resolutionInput.value;
     if (code.length > 0) {
         updateImage();
     }
@@ -51,8 +63,15 @@ colorsInput.oninput = () => {
         updateImage();
     }
 }
+imageModeInput.oninput = () => {
+    imageMode = imageModeInput.value;
+    if (code.length > 0) {
+        updateImage();
+    }
+}
 resolutionInput.oninput()
 colorsInput.oninput()
+imageModeInput.oninput()
 
 
 function openloadImagePopup() {
@@ -83,13 +102,47 @@ imageLink.onclick = function() {
 }
 
 
-copyCodeButton.onclick = function() {
-    navigator.clipboard.writeText(code)
-    copyCodeButton.style.animation = "copyButton 1s ease-out"
+function animateButton(btn) {
+    btn.style.animation = "copyButton 1s ease-out"
     setTimeout(() => {
-        copyCodeButton.style.animation = ""
+        btn.style.animation = ""
     }, 1100)
 }
+copyCodeButton.onclick = function() {
+    navigator.clipboard.writeText(code)
+    animateButton(copyCodeButton)
+}
+transferButton.onclick = async function() {
+    if (fileInput.files.length == 0) {
+        return;
+    }
+
+    imageName = fileInput.files[0].name;
+    filename = "";
+    for (let i = 0 ; i < imageName.length ; i++) {
+        let l = imageName[i];
+        if (l == ".") {
+            break;
+        } else {
+            filename += l;
+        }
+    }
+    filename += ".py"
+    
+    console.log("Transfer : ", filename)
+    
+
+    var storage = await calculator.backupStorage();
+
+    console.log(storage)
+    storage.records.push({"name": "test", "type": "py", "autoImport": true/*, position: 0*/, "code": "print('Hello World!')\n"});
+    console.log(storage)
+    await calculator.installStorage(storage, function() {
+        console.log("Transfer réussi")
+        animateButton(transferButton);
+    });
+}
+
 
 function setPixel(x, y, color) {
     imageCanvasCtx.fillStyle = `rgb(${color[0]},${color[1]},${color[2]})`
@@ -99,32 +152,56 @@ function setPixel(x, y, color) {
 
 function foldValue(value) {
     // return Math.round(value/colorFold)*colorFold
-    return Math.round(value / colorFold)
+    return Math.round(value / colorFold);
 }
 function unfoldValue(value) {
-    return value * colorFold
+    return value * colorFold;
 }
-var transparencyColor = [255, 255, 255]
-function getRGB(data, width, x, y) {
-    const index = (y*width + x)*4
+var transparencyColor = [255, 255, 255];
+function getRGB(data, width, x, y, isGrayscale, blackWhite) {
+    var index = (y*width + x)*4;
 
     if (data[index+3] == 0) {
         return [foldValue(transparencyColor[0]), foldValue(transparencyColor[1]), foldValue(transparencyColor[2])]
     }
 
-    return [foldValue(data[index]), foldValue(data[index+1]), foldValue(data[index+2])]
+    let r = data[index];
+    let g = data[index+1];
+    let b = data[index+2];
+
+    if (isGrayscale) {
+        let l = foldValue(parseInt(r*.299 + g*.587 + b*.114));
+        return [l, l, l];
+    } else if (blackWhite) {
+        index = (y*width + (x+1))*4;
+        let r2 = data[index];
+        let g2 = data[index+1];
+        let b2 = data[index+2];
+        index = ((y+1)*width + x)*4;
+        let r3 = data[index];
+        let g3 = data[index+1];
+        let b3 = data[index+2];
+        if (r + g + b > (r2 + g2 + b2 + r3 + g3 + b3 + 127)/2.3) {
+            return [foldValue(255), foldValue(255), foldValue(255)]
+        } else {
+            return [foldValue(0), foldValue(0), foldValue(0)]
+        }
+    } else {
+        return [foldValue(r), foldValue(g), foldValue(b)];
+    }
 }
 function RGBToNumber(color) {
     return color[0]*65_025 + color[1]*255 + color[2]
 }
 
 // not fully implemented
-function pixelsToCode(data, width, height) {
+/*function pixelsToCode(data, width, height) {
     result = "data="
+
     for (y=0 ; y<height ; y++) {
         result += "("
         for (x=0 ; x<width ; x++) {
-            var color = getRGB(data, width, x, y)
+            var color = getRGB(data, width, x, y, isGreyScale)
 
             result += `(${color[0]},${color[1]},${color[2]}),`
         }
@@ -132,7 +209,9 @@ function pixelsToCode(data, width, height) {
     }
     console.log(result.length)
     return result
-}
+}*/
+
+
 //const indexesLabels = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,;:!/*-+.-_={}[]()<>@$&%^|\"áâäéêëíîïñśóõöúûüÿ☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼┤ÁÂÀ©╣║↕7╝¢¥┐└┴┬├─┼Ã╚ÊËÈıÍÎÏ┘┌█▄¦Ì▀ÓßÔÒ"
 const indexesLabels = `{zEDGFA@CBMLONIHKJUTWVQPSR]_^YX[Z%̈$'&! #"-,/.̄)(+*=<?>;:
     ¢¡®­¬«©±°§¦¥¤£edgfa\`cbmlonihkjutwvqpsr}\|~yx`
@@ -147,6 +226,19 @@ function pixelsToCodeIndexed(data, width, height, partitionLength) {
         throw Exception(`Bad partitionLength value: ${partitionLength}`)
     }
 
+    let isGrayscale;
+    if (imageMode == MODE_GRAYSCALE) {
+        isGrayscale = true;
+    } else {
+        isGrayscale = false;
+    }
+    let isBlackwhite;
+    if (imageMode == MODE_BLACKWHITE) {
+        isBlackwhite = true;
+    } else {
+        isBlackwhite = false;
+    }
+
     const indexed = {} // colorKey : [color, label]
     var indexedCount = 0
 
@@ -156,7 +248,7 @@ function pixelsToCodeIndexed(data, width, height, partitionLength) {
     
     for (y=0 ; y<height ; y++) {
         for (x=0 ; x<width ; x++) {
-            color = getRGB(data, width, x, y)
+            color = getRGB(data, width, x, y, isGrayscale, isBlackwhite)
             key = colorToKey(color)
             if (!(key in indexed)) {
                 // console.log(color[0]*colorFold, color[1]*colorFold, color[2]*colorFold)
@@ -183,7 +275,7 @@ function pixelsToCodeIndexed(data, width, height, partitionLength) {
     var color;
     for (y=0 ; y<height ; y++) {
         for (x=0 ; x<width ; x++) {
-            color = getRGB(data, width, x, y)
+            color = getRGB(data, width, x, y, isGrayscale, isBlackwhite)
 
             values = indexed[colorToKey(color)]
 
@@ -305,3 +397,50 @@ imageLinkInput.addEventListener("keydown", (event) => {
         closeloadImagePopup()
     }
 })
+
+
+// Connexion to the calculator
+
+var calculator = new Numworks();
+
+function onCalculatorConnected() {
+    console.log("Numworks Connected");
+
+    transferButton.disabled = false;
+    connectButton.disabled = true;
+}
+
+function setupCalculator() {
+    transferButton.disabled = true;
+    connectButton.disabled = false;
+
+    navigator.usb.addEventListener("disconnect", function(e) {
+        calculator.onUnexpectedDisconnect(e, function() {
+            console.log("Numworks Disconnected");
+            transferButton.disabled = true;
+            connectButton.disabled = false;
+        });
+    });
+}
+
+// TODO : NOT SUPPORTED YET
+if (/*navigator.usb*/ false) {
+    setupCalculator();
+
+    // Show the buttons
+    connectButton.hidden = false;
+    transferButton.hidden = false;
+
+    connectButton.addEventListener("click", () => {
+        console.log("Numworks detection");
+        animateButton(connectButton)
+        calculator.detect(onCalculatorConnected, function(error) {
+            console.log(error);
+        });
+    })
+} else {
+    copyCodeButton.hidden = false;
+    decoderLinkButton.hidden = false;
+    numworksLinkButton.hidden = false;
+    helpLinkButton.hidden = false;
+}
